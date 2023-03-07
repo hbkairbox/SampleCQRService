@@ -1,7 +1,7 @@
 ﻿using SampleCQRService.Infrastructure.DBContext;
 using SampleCQRService.Infrastructure.Entities;
 
-namespace SampleCQRService.Infrastructure.ReadOnly;
+namespace SampleCQRService.Infrastructure.Repositories.ReadOnly;
 
 public class CategoryReadOnlyRepository : ICategoryReadOnlyRepository
 {

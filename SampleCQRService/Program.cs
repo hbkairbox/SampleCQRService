@@ -1,8 +1,8 @@
 using System.Reflection;
 using Microsoft.EntityFrameworkCore;
 using SampleCQRService.Infrastructure.DBContext;
-using SampleCQRService.Infrastructure.Persistence;
-using SampleCQRService.Infrastructure.ReadOnly;
+using SampleCQRService.Infrastructure.Repositories.Persistence;
+using SampleCQRService.Infrastructure.Repositories.ReadOnly;
 
 var builder = WebApplication.CreateBuilder(args);
 

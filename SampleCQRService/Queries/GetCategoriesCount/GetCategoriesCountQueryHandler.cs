@@ -1,4 +1,4 @@
-﻿using SampleCQRService.Infrastructure.ReadOnly;
+﻿using SampleCQRService.Infrastructure.Repositories.ReadOnly;
 
 namespace SampleCQRService.Queries.GetCategoriesCount;
 

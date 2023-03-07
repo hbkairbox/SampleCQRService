@@ -1,7 +1,7 @@
 ﻿using SampleCQRService.Infrastructure.Entities;
 using SampleCQRService.Infrastructure.Repositories;
 
-namespace SampleCQRService.Infrastructure.Persistence
+namespace SampleCQRService.Infrastructure.Repositories.Persistence
 {
     public interface ICategoryCommandRepository : ICommandRepository
     {

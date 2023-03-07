@@ -1,5 +1,5 @@
 ﻿using SampleCQRService.Infrastructure.Entities;
-using SampleCQRService.Infrastructure.Persistence;
+using SampleCQRService.Infrastructure.Repositories.Persistence;
 
 namespace SampleCQRService.Commands.CreateCategory;
 

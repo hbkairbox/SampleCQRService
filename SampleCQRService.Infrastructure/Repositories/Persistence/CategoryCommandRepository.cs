@@ -3,7 +3,7 @@ using SampleCQRService.Infrastructure.DBContext;
 using SampleCQRService.Infrastructure.Entities;
 using SampleCQRService.Infrastructure.Repositories;
 
-namespace SampleCQRService.Infrastructure.Persistence;
+namespace SampleCQRService.Infrastructure.Repositories.Persistence;
 
 public class CategoryCommandRepository : ICategoryCommandRepository
 {
@@ -32,7 +32,7 @@ public class CategoryCommandRepository : ICategoryCommandRepository
         var category = await _writeDbContext
                             .Categories
                             .SingleOrDefaultAsync(o => o.Id == categoryId);
-        
+
         if (category == null)
         {
             category = _writeDbContext
