@@ -6,5 +6,7 @@
 bin
 obj
 
+.vs/
+
 
 **/appsettings.json
