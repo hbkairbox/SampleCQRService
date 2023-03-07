@@ -1,0 +1,14 @@
+C:\Users\Hari.Balakrishnan\source\repos\SampleCQRService.Infrastructure\bin\Debug\net7.0\SampleCQRService.Infrastructure.deps.json
+C:\Users\Hari.Balakrishnan\source\repos\SampleCQRService.Infrastructure\bin\Debug\net7.0\SampleCQRService.Infrastructure.dll
+C:\Users\Hari.Balakrishnan\source\repos\SampleCQRService.Infrastructure\bin\Debug\net7.0\SampleCQRService.Infrastructure.pdb
+C:\Users\Hari.Balakrishnan\source\repos\SampleCQRService.Infrastructure\obj\Debug\net7.0\SampleCQRService.Infrastructure.csproj.AssemblyReference.cache
+C:\Users\Hari.Balakrishnan\source\repos\SampleCQRService.Infrastructure\obj\Debug\net7.0\SampleCQRService.Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Hari.Balakrishnan\source\repos\SampleCQRService.Infrastructure\obj\Debug\net7.0\SampleCQRService.Infrastructure.AssemblyInfoInputs.cache
+C:\Users\Hari.Balakrishnan\source\repos\SampleCQRService.Infrastructure\obj\Debug\net7.0\SampleCQRService.Infrastructure.AssemblyInfo.cs
+C:\Users\Hari.Balakrishnan\source\repos\SampleCQRService.Infrastructure\obj\Debug\net7.0\SampleCQRService.Infrastructure.csproj.CoreCompileInputs.cache
+C:\Users\Hari.Balakrishnan\source\repos\SampleCQRService.Infrastructure\obj\Debug\net7.0\SampleCQRService.Infrastructure.dll
+C:\Users\Hari.Balakrishnan\source\repos\SampleCQRService.Infrastructure\obj\Debug\net7.0\refint\SampleCQRService.Infrastructure.dll
+C:\Users\Hari.Balakrishnan\source\repos\SampleCQRService.Infrastructure\obj\Debug\net7.0\SampleCQRService.Infrastructure.pdb
+C:\Users\Hari.Balakrishnan\source\repos\SampleCQRService.Infrastructure\obj\Debug\net7.0\ref\SampleCQRService.Infrastructure.dll
+C:\Users\Hari.Balakrishnan\source\repos\SampleCQRService.Infrastructure\bin\Debug\net7.0\SampleCQRService.Infrastructure.runtimeconfig.json
+C:\Users\Hari.Balakrishnan\source\repos\SampleCQRService.Infrastructure\obj\Debug\net7.0\SampleCQRService.Infrastructure.genruntimeconfig.cache
