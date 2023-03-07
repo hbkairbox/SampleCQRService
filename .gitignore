@@ -5,3 +5,6 @@
 # Files built by Visual Studio
 bin
 obj
+
+
+**/appsettings.json
