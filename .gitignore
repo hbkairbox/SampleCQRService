@@ -1,3 +1,7 @@
 # Build results
 [Dd]ebug/
 [Rr]elease/
+
+# Files built by Visual Studio
+bin
+obj
