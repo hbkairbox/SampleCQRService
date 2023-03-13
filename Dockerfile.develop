@@ -1,0 +1,16 @@
+FROM mcr.microsoft.com/dotnet/sdk:7.0
+ENV ASPNETCORE_ENVIRONMENT=Development
+ENV DOTNET_USE_POLLING_FILE_WATCHER=true
+ENV ASPNETCORE_URLS=http://+:80  
+EXPOSE 80
+
+WORKDIR /src
+COPY ["SampleCQRService.Infrastructure/SampleCQRService.Infrastructure.csproj", "SampleCQRService.Infrastructure/"]
+COPY ["SampleCQRService/SampleCQRService.csproj", "SampleCQRService/"]
+
+RUN dotnet restore SampleCQRService/SampleCQRService.csproj
+COPY . .
+WORKDIR /src/SampleCQRService
+RUN dotnet build -c Debug
+
+ENTRYPOINT ["dotnet", "run", "--no-build", "--no-launch-profile", "-c", "Debug", "--"]
