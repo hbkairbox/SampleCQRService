@@ -1,42 +1,46 @@
 using System.Reflection;
 using Microsoft.EntityFrameworkCore;
 using SampleCQRService.Infrastructure.DBContext;
-using SampleCQRService.Infrastructure.Repositories.Persistence;
-using SampleCQRService.Infrastructure.Repositories.ReadOnly;
 
-var builder = WebApplication.CreateBuilder(args);
+namespace SampleCQRService;
 
-// Add services to the container.
-
-builder.Services.AddControllers();
-
-builder.Services.AddDbContext<Context>(option => option.UseNpgsql(builder.Configuration.GetConnectionString("SystemDBConnStr")));
-
-builder.Services.AddDbContext<IReadOnlyContext, ReadOnlyContext>(option => option.UseNpgsql(builder.Configuration.GetConnectionString("SystemDBConnStr")).UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking));
-
-builder.Services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
-builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblyContaining<Program>());
-
-
-builder.Services.AddScoped<ICategoryCommandRepository, CategoryCommandRepository>();
-builder.Services.AddScoped<ICategoryReadOnlyRepository, CategoryReadOnlyRepository>();
-
-var app = builder.Build();
-
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+public class Program
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
+    public static void Main(string[] args)
+    {
+        var configuration = new ConfigurationBuilder()
+            .SetBasePath(Directory.GetCurrentDirectory())
+            .AddEnvironmentVariables()
+            .AddUserSecrets(Assembly.GetExecutingAssembly(), optional: true)
+            .Build();
+
+        try
+        {
+            var host = CreateHostBuilder(args)
+                .ConfigureAppConfiguration(x => x.AddConfiguration(configuration))
+                .Build();
+
+            using (var serviceScope = host.Services.CreateScope())
+            {
+                var context = serviceScope.ServiceProvider.GetRequiredService<Context>();
+                if (context.Database.GetPendingMigrations().Any())
+                {
+                    context.Database.Migrate();
+                }
+            }
+
+            host.Run();
+        }
+        catch (Exception)
+        {
+            throw;
+        }
+    }
+
+    public static IHostBuilder CreateHostBuilder(string[] args) =>
+        Host.CreateDefaultBuilder(args)
+            .ConfigureWebHostDefaults(webHostBuilder =>
+            {
+                webHostBuilder.UseStartup<Startup>();
+            });
 }
-
-app.UseHttpsRedirection();
-
-app.UseAuthorization();
-
-app.MapControllers();
-
-app.Run();
