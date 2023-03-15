@@ -1,0 +1,54 @@
+version: '3.9'
+networks:
+  proxynet:
+    driver: bridge
+services:
+  traefik:
+    image: traefik
+    command: --web --docker --docker.domain=docker --logLevel=DEBUG
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /develop/traefik/acme:/etc/traefik/acme
+
+  db:
+    image: postgres
+    environment:
+      - POSTGRES_DBNAME=datapersistence
+      - POSTGRES_USER=liquibase_datapersistence
+      - POSTGRES_PASSWORD=pUjgvM71CRJAofRpdgeq29JAB1gdEnTitYyK4NdWlNO7uxdZn4vEYcUb2ceaytlFeUEAr0
+      - ALLOW_IP_RANGE=0.0.0.0/0
+      - DESTROY_DATABASE_ON_RESTART=false
+    volumes:
+      - database_data:/var/lib/postgresql/data
+    ports:
+      - "54321:5432"
+    labels: { "traefik.enable":"false" }
+
+  myapi:
+    image: myapi
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 5050:80
+    environment: 
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_URLS: http://+:80 
+      ConnectionStrings__SystemDBConnStr: Server=host.docker.internal;Database=db1;Port=54321;Username=liquibase_datapersistence;Password=pUjgvM71CRJAofRpdgeq29JAB1gdEnTitYyK4NdWlNO7uxdZn4vEYcUb2ceaytlFeUEAr0
+    links:
+      - db
+    labels: { "traefik.backend":"myapi", "traefik.frontend.rule":"PathPrefixStrip:/" }
+
+  pgadmin4:
+    image: dpage/pgadmin4
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=user@domain.com
+      - PGADMIN_DEFAULT_PASSWORD=SuperSecret
+    ports:
+     - 19000:80
+    links:
+      - db
+
+volumes:
+  database_data:
+    driver: local
