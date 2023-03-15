@@ -1,15 +1,6 @@
 version: '3.9'
-networks:
-  proxynet:
-    driver: bridge
-services:
-  traefik:
-    image: traefik
-    command: --web --docker --docker.domain=docker --logLevel=DEBUG
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-      - /develop/traefik/acme:/etc/traefik/acme
 
+services:
   db:
     image: postgres
     environment:
@@ -22,10 +13,9 @@ services:
       - database_data:/var/lib/postgresql/data
     ports:
       - "54321:5432"
-    labels: { "traefik.enable":"false" }
 
-  myapi:
-    image: myapi
+  cqrs-api:
+    image: cqrs-api
     build:
       context: .
       dockerfile: Dockerfile
@@ -34,10 +24,9 @@ services:
     environment: 
       ASPNETCORE_ENVIRONMENT: Development
       ASPNETCORE_URLS: http://+:80 
-      ConnectionStrings__SystemDBConnStr: Server=host.docker.internal;Database=db1;Port=54321;Username=liquibase_datapersistence;Password=pUjgvM71CRJAofRpdgeq29JAB1gdEnTitYyK4NdWlNO7uxdZn4vEYcUb2ceaytlFeUEAr0
+      ConnectionStrings__SystemDBConnStr: Server=host.docker.internal;Database=cqrs;Port=54321;Username=liquibase_datapersistence;Password=pUjgvM71CRJAofRpdgeq29JAB1gdEnTitYyK4NdWlNO7uxdZn4vEYcUb2ceaytlFeUEAr0
     links:
       - db
-    labels: { "traefik.backend":"myapi", "traefik.frontend.rule":"PathPrefixStrip:/" }
 
   pgadmin4:
     image: dpage/pgadmin4
