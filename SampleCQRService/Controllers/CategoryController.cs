@@ -1,6 +1,7 @@
 ﻿using SampleCQRService.Commands.CreateCategory;
 using SampleCQRService.Commands.DeleteCategory;
 using SampleCQRService.Commands.UpdateCategory;
+using SampleCQRService.Queries.GetCategories;
 using SampleCQRService.Queries.GetCategoriesCount;
 
 namespace SampleCQRService.Controllers;
@@ -51,7 +52,15 @@ public class CategoryController : ControllerBase
         return Ok();
     }
 
-    [HttpGet("{categoryName}")]
+    [HttpGet]
+    public async Task<ActionResult> GetCategoriesAsync()
+    {
+        var queryResult = await _mediator.Send(new GetCategoriesQuery());
+
+        return Ok(queryResult);
+    }
+
+    [HttpGet("{categoryName}/count")]
     public async Task<ActionResult> GetCategoriesCountQueryAsync(string categoryName)
     {
         var queryResult = await _mediator.Send(new GetCategoriesCountQuery(categoryName));

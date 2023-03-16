@@ -48,4 +48,16 @@ public class CategoryReadOnlyRepository : ICategoryReadOnlyRepository
             throw ex;
         }
     }
+
+    public IQueryable<Category> GetAll()
+    {
+        try
+        {
+            return _context.Categories;
+        }
+        catch (Exception ex)
+        {
+            throw ex;
+        }
+    }
 }
